@@ -1,5 +1,5 @@
 import DDB from './ddb';
-import Schema from './schema';
+import Document from './document';
 import init from './init';
 import accessors from './accessors';
 
@@ -21,7 +21,7 @@ Model.compile = (name, schema) => {
   model.db = DDB;
   model.prototype.db = DDB;
 
-  model.prototype = new Schema();
+  model.prototype = new Document();
 
   return model;
 };
