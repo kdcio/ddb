@@ -1,4 +1,4 @@
-import Model from '../src';
+import DDB from '../src';
 
 describe('Model', () => {
   test('should build simple model', () => {
@@ -6,8 +6,11 @@ describe('Model', () => {
       req: { required: true },
       notReq: { required: false },
     };
+    const Obj = DDB.model('Obj', schema);
+
     const data = { req: 'hello' };
-    const obj = new Model({ config: { schema }, data });
+    const obj = new Obj(data);
+
     expect(obj.get('req')).toBe(data.req);
     expect(obj.get('notReq')).toBe('');
 
@@ -27,11 +30,12 @@ describe('Model', () => {
       notReq: { required: false },
     };
     const data = { notReq: 'hello' };
+    const Obj = DDB.model('Obj', schema);
 
     expect.assertions(1);
     try {
       // eslint-disable-next-line no-unused-vars
-      const obj = new Model({ config: { schema }, data });
+      const obj = new Obj(data);
     } catch (err) {
       expect(err.message).toEqual('Missing req');
     }

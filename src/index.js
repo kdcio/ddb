@@ -1,26 +1,11 @@
-import init from './init';
+import Model from './model';
 
-class Model {
-  constructor({ config: { schema }, data }) {
-    this._schema = schema;
-    this._data = init(schema, data);
-  }
+const buildDDB = () => {
+  const model = (name, schema) => {
+    return Model.compile(name, schema);
+  };
 
-  set(k, v) {
-    this._data[k] = v;
-  }
+  return Object.freeze({ model });
+};
 
-  get(k) {
-    return this._data[k];
-  }
-
-  toObject() {
-    return { ...this._data };
-  }
-
-  toJSON() {
-    return JSON.stringify(this._data);
-  }
-}
-
-export default Model;
+export default buildDDB();
