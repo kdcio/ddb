@@ -43,4 +43,9 @@ Document.prototype.save = async function save() {
   await this._db('put', params);
 };
 
+Document.prototype.delete = async function del() {
+  const params = { Key: { ...this.keys() } };
+  await this._db('delete', params);
+};
+
 export default Document;

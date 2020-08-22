@@ -70,6 +70,15 @@ describe('Model', () => {
     expect(obj).toHaveProperty('address');
     expect(obj.address.address1).toBe('Netherlands');
     expect(obj.address.address2).toBe('');
+
+    // delete
+    await obj.delete();
+    obj = await Obj.get({
+      req: obj.req,
+      createdAt: obj.createdAt,
+      notReq: obj.notReq,
+    });
+    expect(obj).toBeNull();
   });
 
   test('should throw error if req field is not defined', () => {
