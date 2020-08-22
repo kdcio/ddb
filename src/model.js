@@ -1,3 +1,4 @@
+import Schema from './schema';
 import init from './init';
 import accessors from './accessors';
 
@@ -16,13 +17,7 @@ Model.compile = (name, schema) => {
 
   model.modelName = name;
 
-  model.prototype.toObject = function toObject() {
-    return { ...this._data };
-  };
-
-  model.prototype.toJSON = function toJSON() {
-    return JSON.stringify(this._data);
-  };
+  model.prototype = new Schema();
 
   return model;
 };
