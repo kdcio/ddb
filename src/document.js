@@ -37,12 +37,6 @@ Document.prototype.keys = function keys() {
 
 Document.prototype.save = async function save() {
   const params = { Item: { ...this.toObject(), ...this.keys() } };
-  console.log(params);
-  await this._db('put', params);
-};
-
-Document.prototype.get = async function get() {
-  const params = { Item: { ...this.toObject(), ...this.keys() } };
   await this._db('put', params);
 };
 

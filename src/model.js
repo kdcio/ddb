@@ -25,6 +25,18 @@ Model.compile = (name, schema) => {
 
   model.modelName = name;
   model.db = DDB;
+  model.get = async function get(data) {
+    const params = {
+      Key: {
+        ...Document.keys(schema.keys, data),
+      },
+    };
+
+    const res = await DDB('get', params);
+    if (!res.Item) return null;
+    return new this(res.Item);
+  };
+
   model.prototype = new Document();
 
   return model;

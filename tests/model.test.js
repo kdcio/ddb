@@ -28,7 +28,7 @@ describe('Model', () => {
     expect(Obj.db).toBe(DDB.db);
 
     const data = { req: 'hello' };
-    const obj = new Obj(data);
+    let obj = new Obj(data);
     expect(obj._db).toBe(DDB.db);
 
     expect(obj.req).toBe(data.req);
@@ -42,6 +42,20 @@ describe('Model', () => {
     expect(obj.notReq).toBe('world');
 
     await obj.save();
+
+    // verify if saved in DynamoDB
+    obj = await Obj.get({
+      req: obj.req,
+      createdAt: obj.createdAt,
+      notReq: obj.notReq,
+    });
+
+    expect(obj.req).toBe(data.req);
+    expect(obj.notReq).toBe('world');
+    expect(obj).toHaveProperty('address');
+    expect(obj.address.address1).toBe('');
+    expect(obj.address.address2).toBe('');
+    expect(obj.createdAt).toMatch(ISO_FORMAT);
   });
 
   test('should throw error if req field is not defined', () => {
