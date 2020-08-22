@@ -2,16 +2,13 @@ const init = (scm, input) => {
   const output = {};
   const keys = Object.keys(scm);
   keys.forEach((key) => {
-    if (!Object.prototype.hasOwnProperty.call(scm, key)) {
-      return;
-    }
     const field = scm[key];
     if (field.required && !input[key]) {
       throw new Error(`Missing ${key}`);
     }
 
     if (field.type === 'object') {
-      output[key] = init(field.fields, input[key]);
+      output[key] = init(field.fields, input[key] || {});
       return;
     }
 

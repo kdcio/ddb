@@ -2,9 +2,18 @@ import DDB from '../src';
 
 describe('Model', () => {
   test('should build simple model', () => {
+    const now = () => new Date().toISOString();
     const schema = {
       req: { required: true },
       notReq: { required: false },
+      address: {
+        type: 'object',
+        required: false,
+        fields: {
+          address1: { required: false, default: '' },
+        },
+      },
+      createdAt: { required: false, default: now },
     };
     const Obj = DDB.model('Obj', schema);
 
@@ -13,15 +22,11 @@ describe('Model', () => {
 
     expect(obj.req).toBe(data.req);
     expect(obj.notReq).toBe('');
+    expect(obj).toHaveProperty('address');
+    expect(obj.address.address1).toBe('');
 
     obj.notReq = 'world';
     expect(obj.notReq).toBe('world');
-
-    const o = obj.toObject();
-    expect(o).toEqual({ req: 'hello', notReq: 'world' });
-
-    const j = obj.toJSON();
-    expect(j).toBe('{"req":"hello","notReq":"world"}');
   });
 
   test('should throw error if req field is not defined', () => {
@@ -39,5 +44,32 @@ describe('Model', () => {
     } catch (err) {
       expect(err.message).toEqual('Missing req');
     }
+  });
+
+  test('should convert to js object', () => {
+    const schema = {
+      req: { required: true },
+      notReq: { required: false },
+    };
+    const Obj = DDB.model('Obj', schema);
+
+    const doc = { req: 'hello' };
+    const obj = new Obj(doc);
+    const o = obj.toObject();
+    expect(typeof o).toBe('object');
+    expect(o).toEqual({ req: 'hello', notReq: '' });
+  });
+
+  test('should convert to JSON string', () => {
+    const schema = {
+      req: { required: true },
+      notReq: { required: false },
+    };
+    const Obj = DDB.model('Obj', schema);
+
+    const doc = { req: 'hello' };
+    const obj = new Obj(doc);
+    const j = obj.toJSON();
+    expect(j).toBe('{"req":"hello","notReq":""}');
   });
 });
