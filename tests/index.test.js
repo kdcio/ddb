@@ -11,11 +11,11 @@ describe('Model', () => {
     const data = { req: 'hello' };
     const obj = new Obj(data);
 
-    expect(obj.get('req')).toBe(data.req);
-    expect(obj.get('notReq')).toBe('');
+    expect(obj.req).toBe(data.req);
+    expect(obj.notReq).toBe('');
 
-    obj.set('notReq', 'world');
-    expect(obj.get('notReq')).toBe('world');
+    obj.notReq = 'world';
+    expect(obj.notReq).toBe('world');
 
     const o = obj.toObject();
     expect(o).toEqual({ req: 'hello', notReq: 'world' });
