@@ -1,3 +1,4 @@
+import DDB from './ddb';
 import Schema from './schema';
 import init from './init';
 import accessors from './accessors';
@@ -5,6 +6,7 @@ import accessors from './accessors';
 const Model = {};
 
 Model.compile = (name, schema) => {
+  // create new class
   const model = function model(doc) {
     this._schema = schema;
 
@@ -16,6 +18,8 @@ Model.compile = (name, schema) => {
   };
 
   model.modelName = name;
+  model.db = DDB;
+  model.prototype.db = DDB;
 
   model.prototype = new Schema();
 
