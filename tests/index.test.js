@@ -1,5 +1,7 @@
 import DDB from '../src';
 
+const ISO_FORMAT = /\d{4}-[01]\d-[0-3]\dT[0-2]\d:[0-5]\d:[0-5]\d\.\d+([+-][0-2]\d:[0-5]\d|Z)/;
+
 describe('Model', () => {
   test('should build simple model', () => {
     const now = () => new Date().toISOString();
@@ -11,6 +13,7 @@ describe('Model', () => {
         required: false,
         fields: {
           address1: { required: false, default: '' },
+          address2: { required: false, default: '' },
         },
       },
       createdAt: { required: false, default: now },
@@ -29,6 +32,8 @@ describe('Model', () => {
     expect(obj.notReq).toBe('');
     expect(obj).toHaveProperty('address');
     expect(obj.address.address1).toBe('');
+    expect(obj.address.address2).toBe('');
+    expect(obj.createdAt).toMatch(ISO_FORMAT);
 
     obj.notReq = 'world';
     expect(obj.notReq).toBe('world');
