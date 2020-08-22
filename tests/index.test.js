@@ -3,7 +3,7 @@ import DDB from '../src';
 describe('Model', () => {
   test('should build simple model', () => {
     const now = () => new Date().toISOString();
-    const schema = {
+    const fields = {
       req: { required: true },
       notReq: { required: false },
       address: {
@@ -15,6 +15,11 @@ describe('Model', () => {
       },
       createdAt: { required: false, default: now },
     };
+    const keys = {
+      pk: '{req}',
+      sk: 'COM#{createdAt}',
+    };
+    const schema = new DDB.Schema(fields, keys);
     const Obj = DDB.model('Obj', schema);
 
     const data = { req: 'hello' };
@@ -30,10 +35,15 @@ describe('Model', () => {
   });
 
   test('should throw error if req field is not defined', () => {
-    const schema = {
+    const fields = {
       req: { required: true },
       notReq: { required: false },
     };
+    const keys = {
+      pk: '{req}',
+      sk: 'COM#{createdAt}',
+    };
+    const schema = new DDB.Schema(fields, keys);
     const data = { notReq: 'hello' };
     const Obj = DDB.model('Obj', schema);
 
@@ -47,10 +57,15 @@ describe('Model', () => {
   });
 
   test('should convert to js object', () => {
-    const schema = {
+    const fields = {
       req: { required: true },
       notReq: { required: false },
     };
+    const keys = {
+      pk: '{req}',
+      sk: 'COM#{createdAt}',
+    };
+    const schema = new DDB.Schema(fields, keys);
     const Obj = DDB.model('Obj', schema);
 
     const doc = { req: 'hello' };
@@ -61,10 +76,15 @@ describe('Model', () => {
   });
 
   test('should convert to JSON string', () => {
-    const schema = {
+    const fields = {
       req: { required: true },
       notReq: { required: false },
     };
+    const keys = {
+      pk: '{req}',
+      sk: 'COM#{createdAt}',
+    };
+    const schema = new DDB.Schema(fields, keys);
     const Obj = DDB.model('Obj', schema);
 
     const doc = { req: 'hello' };
