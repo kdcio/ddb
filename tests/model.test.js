@@ -56,6 +56,20 @@ describe('Model', () => {
     expect(obj.address.address1).toBe('');
     expect(obj.address.address2).toBe('');
     expect(obj.createdAt).toMatch(ISO_FORMAT);
+
+    // update data
+    obj.address.address1 = 'Netherlands';
+    await obj.save();
+    obj = await Obj.get({
+      req: obj.req,
+      createdAt: obj.createdAt,
+      notReq: obj.notReq,
+    });
+    expect(obj.req).toBe(data.req);
+    expect(obj.notReq).toBe('world');
+    expect(obj).toHaveProperty('address');
+    expect(obj.address.address1).toBe('Netherlands');
+    expect(obj.address.address2).toBe('');
   });
 
   test('should throw error if req field is not defined', () => {
