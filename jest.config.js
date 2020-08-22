@@ -10,4 +10,5 @@ module.exports = {
     '<rootDir>/coverage/',
   ],
   globalSetup: `<rootDir>/tests/setup.js`,
+  globalTeardown: `<rootDir>/tests/teardown.js`,
 };

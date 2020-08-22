@@ -12,19 +12,18 @@ Document.prototype.toJSON = function toJSON() {
   return JSON.stringify(this._data);
 };
 
-Document.prototype.keys = function keys() {
+Document.keys = function keys(keyDefs, data) {
   const tokenMatcher = /({([a-zA-Z0-9]+)})/g;
   const parsedKeys = {};
-  const { keys: _keys } = this._schema;
-  const ks = Object.keys(_keys);
+  const ks = Object.keys(keyDefs);
   ks.forEach((k) => {
-    const field = _keys[k];
+    const field = keyDefs[k];
     const tokens = field.match(tokenMatcher);
     if (!tokens) parsedKeys[k] = field;
     let value = field;
     tokens.forEach((t) => {
       const dKey = t.replace(/{|}/g, '');
-      value = value.replace(t, this._data[dKey] || '');
+      value = value.replace(t, data[dKey] || '');
     });
     parsedKeys[k] = value;
   });
@@ -32,7 +31,17 @@ Document.prototype.keys = function keys() {
   return parsedKeys;
 };
 
+Document.prototype.keys = function keys() {
+  return Document.keys(this._schema.keys, this._data);
+};
+
 Document.prototype.save = async function save() {
+  const params = { Item: { ...this.toObject(), ...this.keys() } };
+  console.log(params);
+  await this._db('put', params);
+};
+
+Document.prototype.get = async function get() {
   const params = { Item: { ...this.toObject(), ...this.keys() } };
   await this._db('put', params);
 };
