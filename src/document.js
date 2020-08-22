@@ -2,8 +2,7 @@ import DDB from './ddb';
 
 const Document = function Document() {};
 
-Document.db = DDB;
-Document.prototype.db = DDB;
+Document.prototype._db = DDB;
 
 Document.prototype.toObject = function toObject() {
   return { ...this._data };

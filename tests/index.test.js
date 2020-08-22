@@ -29,7 +29,7 @@ describe('Model', () => {
 
     const data = { req: 'hello' };
     const obj = new Obj(data);
-    expect(obj.db).toBe(DDB.db);
+    expect(obj._db).toBe(DDB.db);
 
     expect(obj.req).toBe(data.req);
     expect(obj.notReq).toBe('');
