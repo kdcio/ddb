@@ -34,17 +34,21 @@ Document.keys = function keys(keyDefs, data) {
   return parsedKeys;
 };
 
-Document.prototype.keys = function keys() {
-  return Document.keys(this._schema.keys, this._data);
+Document.prototype.pKey = function pKey() {
+  return Document.keys(this._schema.pKey, this._data);
+};
+
+Document.prototype.sKey = function sKey() {
+  return Document.keys(this._schema.sKey, this._data);
 };
 
 Document.prototype.save = async function save() {
-  const params = { Item: { ...this.toObject(), ...this.keys() } };
+  const params = { Item: { ...this.toObject(), ...this.pKey() } };
   await this._db('put', params);
 };
 
 Document.prototype.delete = async function del() {
-  const params = { Key: { ...this.keys() } };
+  const params = { Key: { ...this.pKey() } };
   await this._db('delete', params);
 };
 

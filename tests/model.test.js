@@ -18,11 +18,11 @@ describe('Model', () => {
       },
       createdAt: { required: false, default: now },
     };
-    const keys = {
+    const pKey = {
       pk: '{req}',
       sk: 'COM#{createdAt}#{notReq}',
     };
-    const schema = new DDB.Schema(fields, keys);
+    const schema = new DDB.Schema(fields, pKey);
     const Obj = DDB.model('Obj', schema);
     expect(Obj.modelName).toBe('Obj');
     expect(Obj.db).toBe(DDB.db);
@@ -86,11 +86,11 @@ describe('Model', () => {
       req: { required: true },
       notReq: { required: false },
     };
-    const keys = {
+    const pKey = {
       pk: '{req}',
       sk: 'COM#{createdAt}',
     };
-    const schema = new DDB.Schema(fields, keys);
+    const schema = new DDB.Schema(fields, pKey);
     const data = { notReq: 'hello' };
     const Obj = DDB.model('Obj', schema);
 
@@ -108,11 +108,11 @@ describe('Model', () => {
       req: { required: true },
       notReq: { required: false },
     };
-    const keys = {
+    const pKey = {
       pk: '{req}',
       sk: 'COM#{createdAt}',
     };
-    const schema = new DDB.Schema(fields, keys);
+    const schema = new DDB.Schema(fields, pKey);
     const Obj = DDB.model('Obj', schema);
 
     const doc = { req: 'hello' };
@@ -127,11 +127,11 @@ describe('Model', () => {
       req: { required: true },
       notReq: { required: false },
     };
-    const keys = {
+    const pKey = {
       pk: '{req}',
       sk: 'COM#{createdAt}',
     };
-    const schema = new DDB.Schema(fields, keys);
+    const schema = new DDB.Schema(fields, pKey);
     const Obj = DDB.model('Obj', schema);
 
     const doc = { req: 'hello' };

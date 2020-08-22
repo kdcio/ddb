@@ -1,6 +1,7 @@
-const Schema = function Schema(fields, keys) {
+const Schema = function Schema(fields, pKey, sKey = {}) {
   this.fields = fields;
-  this.keys = keys;
+  this.pKey = pKey; // pk & sk
+  this.sKey = sKey; // pk2 & sk2
 };
 
 export default Schema;

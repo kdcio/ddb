@@ -28,7 +28,7 @@ Model.compile = (name, schema) => {
   model.get = async function get(data) {
     const params = {
       Key: {
-        ...Document.keys(schema.keys, data),
+        ...Document.keys(schema.pKey, data),
       },
     };
 
