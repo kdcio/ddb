@@ -19,7 +19,10 @@ Document.keys = function keys(keyDefs, data) {
   ks.forEach((k) => {
     const field = keyDefs[k];
     const tokens = field.match(tokenMatcher);
-    if (!tokens) parsedKeys[k] = field;
+    if (!tokens) {
+      parsedKeys[k] = field;
+      return;
+    }
     let value = field;
     tokens.forEach((t) => {
       const dKey = t.replace(/{|}/g, '');
