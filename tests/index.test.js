@@ -1,8 +1,39 @@
-import myRandom from '../src';
+import Model from '../src';
 
-describe('My Random Test', () => {
-  it('should be 32 characters', () => {
-    const rand = myRandom();
-    expect(rand.length).toEqual(32);
+describe('Model', () => {
+  test('should build simple model', () => {
+    const schema = {
+      req: { required: true },
+      notReq: { required: false },
+    };
+    const data = { req: 'hello' };
+    const obj = new Model({ config: { schema }, data });
+    expect(obj.get('req')).toBe(data.req);
+    expect(obj.get('notReq')).toBe('');
+
+    obj.set('notReq', 'world');
+    expect(obj.get('notReq')).toBe('world');
+
+    const o = obj.toObject();
+    expect(o).toEqual({ req: 'hello', notReq: 'world' });
+
+    const j = obj.toJSON();
+    expect(j).toBe('{"req":"hello","notReq":"world"}');
+  });
+
+  test('should throw error if req field is not defined', () => {
+    const schema = {
+      req: { required: true },
+      notReq: { required: false },
+    };
+    const data = { notReq: 'hello' };
+
+    expect.assertions(1);
+    try {
+      // eslint-disable-next-line no-unused-vars
+      const obj = new Model({ config: { schema }, data });
+    } catch (err) {
+      expect(err.message).toEqual('Missing req');
+    }
   });
 });

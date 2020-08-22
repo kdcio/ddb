@@ -1,7 +1,26 @@
-import crypto from 'crypto';
+import init from './init';
 
-const myRandom = () => {
-  return crypto.randomBytes(16).toString('hex');
-};
+class Model {
+  constructor({ config: { schema }, data }) {
+    this._schema = schema;
+    this._data = init(schema, data);
+  }
 
-export default myRandom;
+  set(k, v) {
+    this._data[k] = v;
+  }
+
+  get(k) {
+    return this._data[k];
+  }
+
+  toObject() {
+    return { ...this._data };
+  }
+
+  toJSON() {
+    return JSON.stringify(this._data);
+  }
+}
+
+export default Model;

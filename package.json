@@ -1,7 +1,7 @@
 {
-  "name": "kdc-ddb",
+  "name": "@kdcsoftware/ddb",
   "version": "0.1.0",
-  "description": "",
+  "description": "Simple DynamoDB ODM",
   "main": "lib/index.js",
   "scripts": {
     "build:commonjs": "babel src --out-dir lib",
@@ -9,7 +9,7 @@
     "build": "npm run clean && npm run bundle",
     "lint": "eslint src --ext .js",
     "test": "jest",
-    "watch": "jest --watchAll --runInBand",
+    "test:watch": "jest --watchAll",
     "coverage": "jest --coverage",
     "bundle": "parcel build src/index.js"
   },
