@@ -3,7 +3,7 @@ import DDB from '../src';
 const ISO_FORMAT = /\d{4}-[01]\d-[0-3]\dT[0-2]\d:[0-5]\d:[0-5]\d\.\d+([+-][0-2]\d:[0-5]\d|Z)/;
 
 describe('Model', () => {
-  test('should build simple model', () => {
+  test('should build simple model', async () => {
     const now = () => new Date().toISOString();
     const fields = {
       req: { required: true },
@@ -24,9 +24,12 @@ describe('Model', () => {
     };
     const schema = new DDB.Schema(fields, keys);
     const Obj = DDB.model('Obj', schema);
+    expect(Obj.modelName).toBe('Obj');
+    expect(Obj.db).toBe(DDB.db);
 
     const data = { req: 'hello' };
     const obj = new Obj(data);
+    expect(obj.db).toBe(DDB.db);
 
     expect(obj.req).toBe(data.req);
     expect(obj.notReq).toBe('');
@@ -37,6 +40,8 @@ describe('Model', () => {
 
     obj.notReq = 'world';
     expect(obj.notReq).toBe('world');
+
+    await obj.save();
   });
 
   test('should throw error if req field is not defined', () => {

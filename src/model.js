@@ -4,7 +4,7 @@ import Document from './document';
 import init from './init';
 import accessors from './accessors';
 
-const Model = {};
+const Model = function Model() {};
 
 Model.compile = (name, schema) => {
   if (!(schema instanceof Schema)) {
@@ -13,7 +13,7 @@ Model.compile = (name, schema) => {
     );
   }
   // create new class
-  const model = function model(doc) {
+  const model = function factory(doc) {
     this._schema = schema;
 
     // initialize document
@@ -25,8 +25,6 @@ Model.compile = (name, schema) => {
 
   model.modelName = name;
   model.db = DDB;
-  model.prototype.db = DDB;
-
   model.prototype = new Document();
 
   return model;
