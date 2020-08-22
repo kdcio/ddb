@@ -5,5 +5,8 @@ module.exports = async () => {
   // eslint-disable-next-line no-console
   debug('Teardown DynamoDB');
 
-  await DynamoDbLocal.stopChild(global.__DYNAMODB__);
+  if (global.__DYNAMODB__) {
+    await DynamoDbLocal.stopChild(global.__DYNAMODB__);
+    global.__DYNAMODB__ = null;
+  }
 };

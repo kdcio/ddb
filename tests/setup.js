@@ -22,9 +22,15 @@ const setup = async () => {
   global.__DYNAMODB_CLIENT__ = dynamoDB;
 
   // eslint-disable-next-line no-console
-  debug(`Launch DB instance`);
-
-  global.__DYNAMODB__ = await DynamoDbLocal.launch(PORT, null, OPTIONS);
+  if (!global.__DYNAMODB__) {
+    debug(`Launch DB instance`);
+    try {
+      global.__DYNAMODB__ = await DynamoDbLocal.launch(PORT, null, OPTIONS);
+      debug(global.__DYNAMODB__);
+    } catch (error) {
+      debug(`Unable to launch DB instance: ${error}`);
+    }
+  }
 
   try {
     debug(`Deleting existing table ${TABLE.TableName}`);
