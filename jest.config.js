@@ -9,4 +9,5 @@ module.exports = {
     '<rootDir>/lib/',
     '<rootDir>/coverage/',
   ],
+  globalSetup: `<rootDir>/tests/setup.js`,
 };

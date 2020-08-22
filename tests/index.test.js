@@ -20,7 +20,7 @@ describe('Model', () => {
     };
     const keys = {
       pk: '{req}',
-      sk: 'COM#{createdAt}',
+      sk: 'COM#{createdAt}#{notReq}',
     };
     const schema = new DDB.Schema(fields, keys);
     const Obj = DDB.model('Obj', schema);
