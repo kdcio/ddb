@@ -31,6 +31,8 @@ Model.compile = (name, schema) => {
   model.db = db;
 
   model.prototype = new Document();
+  model.prototype.db = db;
+
   // Default statics and methods
   applyStatics(model, dbOps);
   applyMethods(model, dbOps);

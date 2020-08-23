@@ -1,9 +1,6 @@
-import db from './db';
 import assignKeyValues from './helpers/assignKeyValues';
 
 const Document = function Document() {};
-
-Document.prototype.db = db;
 
 Document.prototype.toObject = function toObject() {
   return { ...this._data };
