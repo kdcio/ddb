@@ -1,5 +1,8 @@
 import DynamoDB from 'aws-sdk/clients/dynamodb';
 import AWS from 'aws-sdk/global';
+import Debug from 'debug';
+
+const debug = Debug('ddb:db');
 
 const DB = (action, params) => {
   const awsConfigs = {};
@@ -22,22 +25,22 @@ const DB = (action, params) => {
       });
     });
 
+    debug(actualParams);
     const req = client[action](actualParams);
     req.on('extractError', (response) => {
       try {
         const reasons = JSON.parse(response.httpResponse.body.toString())
           .CancellationReasons;
-        // eslint-disable-next-line no-console
-        console.log(reasons);
+        debug(reasons);
       } catch (err) {
         // suppress this just in case some types of errors aren't JSON objects
-        // eslint-disable-next-line no-console
-        console.error('Error extracting cancellation error', err);
+        debug('Error extracting cancellation error', err);
       }
     });
 
     return req.promise();
   }
+  debug(actualParams);
   return client[action](actualParams).promise();
 };
 
