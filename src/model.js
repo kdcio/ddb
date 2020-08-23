@@ -7,7 +7,7 @@ import assignValues from './helpers/assignValues';
 import applyStatics from './helpers/applyStatics';
 import applyMethods from './helpers/applyMethods';
 
-const Model = function Model() {};
+const Model = {};
 
 Model.compile = (name, schema) => {
   if (!(schema instanceof Schema)) {
