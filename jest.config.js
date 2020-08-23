@@ -9,6 +9,6 @@ module.exports = {
     '<rootDir>/lib/',
     '<rootDir>/coverage/',
   ],
-  globalSetup: `<rootDir>/tests/setup.js`,
-  globalTeardown: `<rootDir>/tests/teardown.js`,
+  globalSetup: `<rootDir>/jest.setup.js`,
+  globalTeardown: `<rootDir>/jest.teardown.js`,
 };

@@ -2,7 +2,7 @@ const DynamoDB = require('aws-sdk/clients/dynamodb');
 const DynamoDbLocal = require('dynamodb-local');
 const debug = require('debug')('jest:setup');
 
-const TABLE = require('../schema.json');
+const TABLE = require('./schema.json');
 
 const PORT = 8987;
 const OPTIONS = ['-sharedDb'];

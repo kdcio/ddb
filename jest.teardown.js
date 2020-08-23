@@ -1,3 +1,4 @@
+/* eslint-disable import/no-extraneous-dependencies */
 const DynamoDbLocal = require('dynamodb-local');
 const debug = require('debug')('jest:setup');
 
