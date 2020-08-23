@@ -31,7 +31,11 @@ Model.compile = (name, schema) => {
   model.db = db;
 
   model.prototype = new Document();
+  // Default statics and methods
   applyStatics(model, dbOps);
+  applyMethods(model, dbOps);
+
+  // Override statics and methods
   applyStatics(model, schema);
   applyMethods(model, schema);
 
