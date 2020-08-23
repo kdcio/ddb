@@ -139,4 +139,26 @@ describe('Model', () => {
     const j = obj.toJSON();
     expect(j).toBe('{"req":"hello","notReq":""}');
   });
+
+  test('should list items', async () => {
+    const fields = {
+      id: { required: true },
+      name: { required: false },
+      type: { required: false },
+    };
+    const pKey = { pk: '{type}#{id}', sk: 'ANIMAL#{type}' };
+    const sKey = { pk2: 'ANIMAL', sk2: '{type}#{id}' };
+    const schema = new DDB.Schema(fields, pKey, sKey);
+    const Animal = DDB.model('Animal', schema);
+
+    const dog = new Animal({ id: 1, name: 'sparkle', type: 'dog' });
+    await dog.save();
+    const cat = new Animal({ id: 1, name: 'kitty', type: 'cat' });
+    await cat.save();
+    const turtle = new Animal({ id: 1, name: 'leonardo', type: 'turtle' });
+    await turtle.save();
+
+    const list = await Animal.list();
+    expect(list).toHaveLength(3);
+  });
 });

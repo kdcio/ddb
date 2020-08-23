@@ -43,7 +43,9 @@ Document.prototype.sKey = function sKey() {
 };
 
 Document.prototype.save = async function save() {
-  const params = { Item: { ...this.toObject(), ...this.pKey() } };
+  const params = {
+    Item: { ...this.toObject(), ...this.pKey(), ...this.sKey() },
+  };
   await this._db('put', params);
 };
 
