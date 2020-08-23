@@ -1,9 +1,9 @@
-import Document from '../../../document';
+import assignKeyValues from '../../assignKeyValues';
 
 const get = async function get(data) {
   const params = {
     Key: {
-      ...Document.keys(this.schema.pKey, data),
+      ...assignKeyValues(this.schema.pKey, data),
     },
   };
 
