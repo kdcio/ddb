@@ -22,4 +22,16 @@ describe('Error', () => {
       expect(err.message).toEqual('Missing req');
     }
   });
+
+  test('should fail due to wrong schema', () => {
+    expect.assertions(1);
+    try {
+      // eslint-disable-next-line no-unused-vars
+      const Obj = DDB.model('Obj', {});
+    } catch (err) {
+      expect(err.message).toEqual(
+        'Make sure 2nd argument is a new instance of DDB.Schema().'
+      );
+    }
+  });
 });
