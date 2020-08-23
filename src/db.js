@@ -1,7 +1,7 @@
 import DynamoDB from 'aws-sdk/clients/dynamodb';
 import AWS from 'aws-sdk/global';
 
-const DDB = (action, params) => {
+const DB = (action, params) => {
   const awsConfigs = {};
   const { DDB_REGION, DDB_ENDPOINT, DDB_TABLE } = process.env;
   if (DDB_REGION) awsConfigs.region = DDB_REGION;
@@ -41,4 +41,4 @@ const DDB = (action, params) => {
   return client[action](actualParams).promise();
 };
 
-export default DDB;
+export default DB;

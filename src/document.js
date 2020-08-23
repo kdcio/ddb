@@ -1,8 +1,8 @@
-import DDB from './ddb';
+import db from './db';
 
 const Document = function Document() {};
 
-Document.prototype._db = DDB;
+Document.prototype.db = db;
 
 Document.prototype.toObject = function toObject() {
   return { ...this._data };
@@ -46,12 +46,12 @@ Document.prototype.save = async function save() {
   const params = {
     Item: { ...this.toObject(), ...this.pKey(), ...this.sKey() },
   };
-  await this._db('put', params);
+  await this.db('put', params);
 };
 
 Document.prototype.delete = async function del() {
   const params = { Key: { ...this.pKey() } };
-  await this._db('delete', params);
+  await this.db('delete', params);
 };
 
 export default Document;

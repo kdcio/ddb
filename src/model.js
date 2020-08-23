@@ -1,10 +1,10 @@
-import DDB from './ddb';
+import db from './db';
 import Schema from './schema';
 import Document from './document';
-import assignValues from './assignValues';
-import accessors from './accessors';
-import applyStatics from './applyStatics';
-import applyMethods from './applyMethods';
+import accessors from './helpers/accessors';
+import assignValues from './helpers/assignValues';
+import applyStatics from './helpers/applyStatics';
+import applyMethods from './helpers/applyMethods';
 
 const Model = function Model() {};
 
@@ -26,7 +26,7 @@ Model.compile = (name, schema) => {
   };
 
   model.modelName = name;
-  model.db = DDB;
+  model.db = db;
   model.get = async function get(data) {
     const params = {
       Key: {
@@ -34,7 +34,7 @@ Model.compile = (name, schema) => {
       },
     };
 
-    const res = await DDB('get', params);
+    const res = await db('get', params);
     if (!res.Item) return null;
     return new this(res.Item);
   };
@@ -52,7 +52,7 @@ Model.compile = (name, schema) => {
       IndexName: 'GSI',
     };
 
-    const res = await DDB('query', params);
+    const res = await db('query', params);
     return res.Items.map((i) => new this(i));
   };
 
