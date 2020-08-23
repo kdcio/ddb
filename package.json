@@ -1,7 +1,7 @@
 {
   "name": "@kdcsoftware/ddb",
   "version": "0.1.0",
-  "description": "Simple DynamoDB ODM",
+  "description": "Lightweight DynamoDB ODM",
   "main": "lib/index.js",
   "scripts": {
     "build:commonjs": "babel src --out-dir lib",
@@ -13,7 +13,14 @@
     "coverage": "jest --coverage",
     "bundle": "parcel build src/index.js"
   },
-  "keywords": [],
+  "keywords": [
+    "kdc",
+    "software",
+    "dynamodb",
+    "odm",
+    "object",
+    "modeling"
+  ],
   "author": {
     "name": "Ian Dela Cruz",
     "email": "iandc76@gmail.com"
