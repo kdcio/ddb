@@ -1,11 +1,14 @@
 # KDC DDB
 
-<!-- Sample badge -->
-<!-- [![license](https://img.shields.io/github/license/kdcsoftware/create-nodejs?style=for-the-badge)](https://github.com/kdcsoftware/create-nodejs/blob/master/LICENSE) -->
-
 A lightweight object modeling for [DynamoDB](https://aws.amazon.com/dynamodb/) inspired by [Mongoose](https://mongoosejs.com/).
 
 The default database operations of this package assumes [single table design](https://www.alexdebrie.com/posts/dynamodb-single-table/) but all can be overridden by writing your own.
+
+[![ver](https://img.shields.io/npm/v/@kdcsoftware/ddb?style=for-the-badge)](https://www.npmjs.com/package/@kdcsoftware/ddb)
+[![build](https://img.shields.io/github/workflow/status/kdcsoftware/ddb/build?style=for-the-badge)](https://github.com/kdcsoftware/ddb/actions?query=workflow%3Abuild)
+[![codecov](https://img.shields.io/codecov/c/github/kdcsoftware/ddb?style=for-the-badge)](https://codecov.io/gh/kdcsoftware/ddb)
+[![size](https://img.shields.io/bundlephobia/min/@kdcsoftware/ddb?style=for-the-badge)](https://bundlephobia.com/result?p=@kdcsoftware/ddb)
+[![license](https://img.shields.io/github/license/kdcsoftware/ddb?style=for-the-badge)](https://github.com/kdcsoftware/ddb/blob/master/LICENSE)
 
 ## Installation
 
