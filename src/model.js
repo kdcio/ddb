@@ -3,6 +3,7 @@ import Schema from './schema';
 import Document from './document';
 import init from './init';
 import accessors from './accessors';
+import applyStatics from './applyStatics';
 
 const Model = function Model() {};
 
@@ -53,6 +54,8 @@ Model.compile = (name, schema) => {
     const res = await DDB('query', params);
     return res.Items.map((i) => new this(i));
   };
+
+  applyStatics(model, schema);
 
   model.prototype = new Document();
 

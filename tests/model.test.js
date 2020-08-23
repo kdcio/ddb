@@ -2,6 +2,21 @@ import DDB from '../src';
 
 const ISO_FORMAT = /\d{4}-[01]\d-[0-3]\dT[0-2]\d:[0-5]\d:[0-5]\d\.\d+([+-][0-2]\d:[0-5]\d|Z)/;
 
+const createAnimals = async (Animal) => {
+  const dog = new Animal({ id: 1, name: 'sparkle', type: 'dog' });
+  await dog.save();
+  const dog2 = new Animal({ id: 2, name: 'browny', type: 'dog' });
+  await dog2.save();
+  const cat = new Animal({ id: 1, name: 'kitty', type: 'cat' });
+  await cat.save();
+  const cat2 = new Animal({ id: 2, name: 'simba', type: 'cat' });
+  await cat2.save();
+  const cat3 = new Animal({ id: 3, name: 'tiger', type: 'cat' });
+  await cat3.save();
+  const turtle = new Animal({ id: 1, name: 'leonardo', type: 'turtle' });
+  await turtle.save();
+};
+
 describe('Model', () => {
   test('should build simple model', async () => {
     const now = () => new Date().toISOString();
@@ -150,15 +165,40 @@ describe('Model', () => {
     const sKey = { pk2: 'ANIMAL', sk2: '{type}#{id}' };
     const schema = new DDB.Schema(fields, pKey, sKey);
     const Animal = DDB.model('Animal', schema);
-
-    const dog = new Animal({ id: 1, name: 'sparkle', type: 'dog' });
-    await dog.save();
-    const cat = new Animal({ id: 1, name: 'kitty', type: 'cat' });
-    await cat.save();
-    const turtle = new Animal({ id: 1, name: 'leonardo', type: 'turtle' });
-    await turtle.save();
-
+    await createAnimals(Animal);
     const list = await Animal.list();
+    expect(list).toHaveLength(6);
+  });
+
+  test('should list items by type', async () => {
+    const fields = {
+      id: { required: true },
+      name: { required: false },
+      type: { required: false },
+    };
+    const pKey = { pk: '{type}#{id}', sk: 'ANIMAL#{type}' };
+    const sKey = { pk2: 'ANIMAL', sk2: '{type}#{id}' };
+    const schema = new DDB.Schema(fields, pKey, sKey);
+    schema.statics.list = async function list(type) {
+      const params = {
+        KeyConditionExpression: '#pk = :pk and begins_with(#sk, :sk)',
+        ExpressionAttributeValues: {
+          ':pk': 'ANIMAL',
+          ':sk': `${type}#`,
+        },
+        ExpressionAttributeNames: {
+          '#pk': 'pk2',
+          '#sk': 'sk2',
+        },
+        IndexName: 'GSI',
+      };
+
+      const res = await this.db('query', params);
+      return res.Items.map((i) => new this(i));
+    };
+    const Animal = DDB.model('Animal', schema);
+    await createAnimals(Animal);
+    const list = await Animal.list('cat');
     expect(list).toHaveLength(3);
   });
 });
