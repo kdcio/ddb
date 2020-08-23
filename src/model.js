@@ -1,7 +1,7 @@
 import DDB from './ddb';
 import Schema from './schema';
 import Document from './document';
-import init from './init';
+import assignValues from './assignValues';
 import accessors from './accessors';
 import applyStatics from './applyStatics';
 import applyMethods from './applyMethods';
@@ -19,7 +19,7 @@ Model.compile = (name, schema) => {
     this._schema = schema;
 
     // initialize document
-    this._data = init(schema.fields, doc);
+    this._data = assignValues(schema.fields, doc);
 
     // Create getters and setters
     accessors(this, schema.fields);
