@@ -4,6 +4,7 @@ import Document from './document';
 import init from './init';
 import accessors from './accessors';
 import applyStatics from './applyStatics';
+import applyMethods from './applyMethods';
 
 const Model = function Model() {};
 
@@ -55,9 +56,9 @@ Model.compile = (name, schema) => {
     return res.Items.map((i) => new this(i));
   };
 
-  applyStatics(model, schema);
-
   model.prototype = new Document();
+  applyStatics(model, schema);
+  applyMethods(model, schema);
 
   return model;
 };

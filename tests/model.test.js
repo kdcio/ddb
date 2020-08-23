@@ -170,7 +170,7 @@ describe('Model', () => {
     expect(list).toHaveLength(6);
   });
 
-  test('should list items by type', async () => {
+  test('should be able to add static methods', async () => {
     const fields = {
       id: { required: true },
       name: { required: false },
@@ -200,5 +200,27 @@ describe('Model', () => {
     await createAnimals(Animal);
     const list = await Animal.list('cat');
     expect(list).toHaveLength(3);
+  });
+
+  test('should be able to add instance methods', async () => {
+    const fields = {
+      id: { required: true },
+      name: { required: false },
+      type: { required: false },
+    };
+    const pKey = { pk: '{type}#{id}', sk: 'ANIMAL#{type}' };
+    const sKey = { pk2: 'ANIMAL', sk2: '{type}#{id}' };
+    const schema = new DDB.Schema(fields, pKey, sKey);
+    schema.methods.rename = async function rename(name) {
+      this.name = name;
+      return this.save();
+    };
+    const Animal = DDB.model('Animal', schema);
+    const dog = new Animal({ id: 1, name: 'sparkle', type: 'dog' });
+    await dog.save();
+    await dog.rename('browny');
+
+    const browny = await Animal.get({ id: 1, type: 'dog' });
+    expect(browny.name).toBe('browny');
   });
 });

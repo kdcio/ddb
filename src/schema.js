@@ -3,6 +3,7 @@ const Schema = function Schema(fields, pKey, sKey = {}) {
   this.pKey = pKey; // pk & sk
   this.sKey = sKey; // pk2 & sk2
   this.statics = {};
+  this.methods = {};
 };
 
 export default Schema;
