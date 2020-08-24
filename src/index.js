@@ -1,8 +1,7 @@
 import Model from './model';
 import Schema from './schema';
 import db from './db';
-import dbHelper from './helpers/db/helpers';
-import applyMethods from './helpers/applyMethods';
+import dbHelpers from './helpers/db/helpers';
 
 const DDB = function DDB() {};
 
@@ -13,6 +12,6 @@ DDB.prototype.model = (name, schema) => {
   return Model.compile(name, schema);
 };
 
-applyMethods(DDB, dbHelper);
+DDB.prototype.helpers = dbHelpers;
 
 export default new DDB();

@@ -12,7 +12,7 @@ describe('DDB helpers', () => {
   });
 
   it('should create table', async () => {
-    const { createTable } = DDB;
+    const { createTable } = DDB.helpers;
     expect.assertions(0);
     try {
       await createTable(schema);
@@ -23,7 +23,7 @@ describe('DDB helpers', () => {
   });
 
   it('should clear by GSI', async () => {
-    const { db, clearByGSI } = DDB;
+    const { clearByGSI } = DDB.helpers;
     const key = {
       pk: 'PK',
       sk: 'SK',
@@ -34,7 +34,7 @@ describe('DDB helpers', () => {
 
     expect.assertions(6);
     try {
-      await db('put', { Item: key });
+      await DDB.db('put', { Item: key });
 
       const params = {
         IndexName: 'GSI',
@@ -43,7 +43,7 @@ describe('DDB helpers', () => {
         ExpressionAttributeValues: { ':pk': 'PK_GSI' },
       };
 
-      let ret = await db('query', params);
+      let ret = await DDB.db('query', params);
       expect(ret).toHaveProperty('Items');
       expect(ret.Count).toBe(1);
       expect(ret.Items[0].pk2).toBe('PK_GSI');
@@ -55,7 +55,7 @@ describe('DDB helpers', () => {
         indexName: 'GSI',
       });
 
-      ret = await db('query', params);
+      ret = await DDB.db('query', params);
       expect(ret).toHaveProperty('Items');
       expect(ret.Count).toBe(0);
     } catch (error) {
@@ -64,22 +64,22 @@ describe('DDB helpers', () => {
   });
 
   it('should clear by Scan', async () => {
-    const { db, clearByScan } = DDB;
+    const { clearByScan } = DDB.helpers;
     const key = { pk: 'PK_SCAN', sk: 'SK_SCAN' };
     const params = { Item: key };
 
     expect.assertions(4);
     try {
-      await db('put', params);
+      await DDB.db('put', params);
 
-      let ret = await db('get', { Key: key });
+      let ret = await DDB.db('get', { Key: key });
       expect(ret).toHaveProperty('Item');
       expect(ret.Item.pk).toBe('PK_SCAN');
       expect(ret.Item.sk).toBe('SK_SCAN');
 
       await clearByScan('pk', 'PK_SCAN');
 
-      ret = await db('get', { Key: key });
+      ret = await DDB.db('get', { Key: key });
       expect(ret).toStrictEqual({});
     } catch (error) {
       debug(error);
@@ -87,7 +87,7 @@ describe('DDB helpers', () => {
   });
 
   it('should delete table', async () => {
-    const { deleteTable } = DDB;
+    const { deleteTable } = DDB.helpers;
     expect.assertions(0);
     try {
       await deleteTable();

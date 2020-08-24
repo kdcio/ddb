@@ -6,14 +6,12 @@ import deleteItem from './ops/deleteItem';
 import deleteTable from './ops/deleteTable';
 
 const helpers = {
-  methods: {
-    clearByGSI,
-    clearByScan,
-    createTable,
-    deleteBulk,
-    deleteItem,
-    deleteTable,
-  },
+  clearByGSI,
+  clearByScan,
+  createTable,
+  deleteBulk,
+  deleteItem,
+  deleteTable,
 };
 
 export default helpers;
