@@ -2,11 +2,11 @@
   "name": "@kdcsoftware/ddb",
   "version": "0.3.0",
   "description": "Lightweight DynamoDB ODM",
-  "main": "lib/index.js",
+  "main": "dist/ddb.js",
   "scripts": {
-    "build:commonjs": "babel src --out-dir lib",
-    "clean": "rm -fR lib",
-    "build": "npm run clean && npm run build:commonjs",
+    "bundle": "webpack",
+    "clean": "rm -fR dist",
+    "build": "npm run clean && npm run bundle",
     "lint": "eslint src --ext .js",
     "test": "jest",
     "test:watch": "jest --watchAll",
@@ -43,7 +43,9 @@
     "jest": "^26.4.1",
     "lint-staged": "^10.2.11",
     "prettier": "^2.0.5",
-    "pretty-quick": "^3.0.0"
+    "pretty-quick": "^3.0.0",
+    "webpack": "^4.44.1",
+    "webpack-cli": "^3.3.12"
   },
   "dependencies": {
     "@babel/runtime": "^7.11.2",
