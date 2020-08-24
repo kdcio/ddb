@@ -10,8 +10,7 @@
     "lint": "eslint src --ext .js",
     "test": "jest",
     "test:watch": "DEBUG='jest:*' jest --watchAll",
-    "coverage": "jest --coverage",
-    "bundle": "parcel build src/index.js"
+    "coverage": "jest --coverage"
   },
   "keywords": [
     "kdc",
@@ -43,7 +42,6 @@
     "husky": "^4.2.5",
     "jest": "^26.4.1",
     "lint-staged": "^10.2.11",
-    "parcel": "^2.0.0-beta.1",
     "prettier": "^2.0.5",
     "pretty-quick": "^3.0.0"
   },
@@ -51,13 +49,6 @@
     "@babel/runtime": "^7.11.2",
     "aws-sdk": "^2.738.0",
     "debug": "^4.1.1"
-  },
-  "targets": {
-    "main": {
-      "engines": {
-        "node": ">=10.x"
-      }
-    }
   },
   "husky": {
     "hooks": {
