@@ -6,10 +6,10 @@
   "scripts": {
     "build:commonjs": "babel src --out-dir lib",
     "clean": "rm -fR lib",
-    "build": "npm run clean && npm run bundle",
+    "build": "npm run clean && npm run build:commonjs",
     "lint": "eslint src --ext .js",
     "test": "jest",
-    "test:watch": "DEBUG='jest:*' jest --watchAll",
+    "test:watch": "jest --watchAll",
     "coverage": "jest --coverage"
   },
   "keywords": [

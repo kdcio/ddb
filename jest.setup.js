@@ -10,7 +10,6 @@ const OPTIONS = ['-sharedDb'];
 process.env.DDB_ENDPOINT = `http://localhost:${PORT}`;
 process.env.DDB_REGION = 'localhost';
 process.env.DDB_TABLE = 'kdc-model.localhost';
-process.env.DEBUG = 'jest:*';
 
 const setup = async () => {
   const dynamoDB = new DynamoDB({
