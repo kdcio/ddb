@@ -81,3 +81,13 @@ npm i @kdcsoftware/ddb
    ```
 
 7. Check the tests folder for more examples.
+
+### Debugging
+
+This package uses [debug](https://www.npmjs.com/package/debug).
+
+To enable:
+
+```bash
+DEBUG=ddb:* node app.js
+```
