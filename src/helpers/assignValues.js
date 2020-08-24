@@ -12,6 +12,14 @@ const assignValues = (fields, input) => {
       return;
     }
 
+    if (
+      input[key] &&
+      typeof field.validate === 'function' &&
+      !field.validate(input[key])
+    ) {
+      throw new Error(`Invalid ${key}`);
+    }
+
     if (input[key]) {
       output[key] = input[key];
       return;
