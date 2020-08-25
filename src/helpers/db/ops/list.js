@@ -14,7 +14,7 @@ const list = async function list({ data = {} } = {}) {
   };
 
   const res = await this.db('query', params);
-  return res.Items.map((i) => new this(i));
+  return res.Items.map((i) => new this(i).toObject());
 };
 
 export default list;
