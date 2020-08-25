@@ -24,6 +24,10 @@
     "name": "Ian Dela Cruz",
     "email": "iandc76@gmail.com"
   },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/kdcsoftware/ddb"
+  },
   "license": "MIT",
   "devDependencies": {
     "@babel/cli": "^7.10.5",
