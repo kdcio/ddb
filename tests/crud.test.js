@@ -4,6 +4,7 @@ const ISO_FORMAT = /\d{4}-[01]\d-[0-3]\dT[0-2]\d:[0-5]\d:[0-5]\d\.\d+([+-][0-2]\
 
 describe('Model', () => {
   test('should build simple model', async () => {
+    expect.assertions(23);
     const now = () => new Date().toISOString();
     const fields = {
       req: { required: true },
@@ -42,6 +43,12 @@ describe('Model', () => {
     expect(obj.notReq).toBe('world');
 
     await obj.save();
+
+    try {
+      await obj.create();
+    } catch (error) {
+      expect(error.message).toBe('Duplicate key');
+    }
 
     // verify if saved in DynamoDB
     obj = await Obj.get({
