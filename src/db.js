@@ -10,8 +10,9 @@ const DB = (action, params) => {
   if (DDB_REGION) awsConfigs.region = DDB_REGION;
   if (DDB_ENDPOINT) awsConfigs.endpoint = new AWS.Endpoint(DDB_ENDPOINT);
 
-  const client = new DynamoDB.DocumentClient(awsConfigs);
   const TableName = DDB_TABLE;
+  const client = new DynamoDB.DocumentClient(awsConfigs);
+  debug(client);
 
   let actualParams = { TableName, ...params };
   if (action === 'transactWrite') {
