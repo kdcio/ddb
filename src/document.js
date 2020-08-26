@@ -1,13 +1,14 @@
 import assignKeyValues from './helpers/assignKeyValues';
+import cleanEmpty from './helpers/cleanEmpty';
 
 const Document = function Document() {};
 
 Document.prototype.toObject = function toObject() {
-  return { ...this._data };
+  return cleanEmpty({ ...this._data });
 };
 
 Document.prototype.toJSON = function toJSON() {
-  return JSON.stringify(this._data);
+  return JSON.stringify(cleanEmpty({ ...this._data }));
 };
 
 Document.prototype.pKey = function pKey() {

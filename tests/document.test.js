@@ -5,6 +5,22 @@ describe('Model', () => {
     const fields = {
       req: { required: true },
       notReq: { required: false },
+      presentAddress: {
+        required: false,
+        type: 'object',
+        fields: {
+          address1: { required: false, default: '123' },
+          address2: { required: false },
+        },
+      },
+      permanentAddress: {
+        required: false,
+        type: 'object',
+        fields: {
+          address1: { required: false },
+          address2: { required: false },
+        },
+      },
     };
     const pKey = {
       pk: '{req}',
@@ -17,13 +33,33 @@ describe('Model', () => {
     const obj = new Obj(doc);
     const o = obj.toObject();
     expect(typeof o).toBe('object');
-    expect(o).toEqual({ req: 'hello', notReq: null });
+    expect(o).toEqual({
+      req: 'hello',
+      presentAddress: { address1: '123' },
+      permanentAddress: {},
+    });
   });
 
   test('should convert to JSON string', () => {
     const fields = {
       req: { required: true },
       notReq: { required: false },
+      presentAddress: {
+        required: false,
+        type: 'object',
+        fields: {
+          address1: { required: false, default: '123' },
+          address2: { required: false },
+        },
+      },
+      permanentAddress: {
+        required: false,
+        type: 'object',
+        fields: {
+          address1: { required: false },
+          address2: { required: false },
+        },
+      },
     };
     const pKey = {
       pk: '{req}',
@@ -35,7 +71,9 @@ describe('Model', () => {
     const doc = { req: 'hello' };
     const obj = new Obj(doc);
     const j = obj.toJSON();
-    expect(j).toBe('{"req":"hello","notReq":null}');
+    expect(j).toBe(
+      '{"req":"hello","presentAddress":{"address1":"123"},"permanentAddress":{}}'
+    );
   });
 
   test('should get primary & secondary keys', async () => {
