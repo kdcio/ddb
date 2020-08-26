@@ -17,7 +17,7 @@ describe('Model', () => {
     const obj = new Obj(doc);
     const o = obj.toObject();
     expect(typeof o).toBe('object');
-    expect(o).toEqual({ req: 'hello', notReq: '' });
+    expect(o).toEqual({ req: 'hello', notReq: null });
   });
 
   test('should convert to JSON string', () => {
@@ -35,7 +35,7 @@ describe('Model', () => {
     const doc = { req: 'hello' };
     const obj = new Obj(doc);
     const j = obj.toJSON();
-    expect(j).toBe('{"req":"hello","notReq":""}');
+    expect(j).toBe('{"req":"hello","notReq":null}');
   });
 
   test('should get primary & secondary keys', async () => {

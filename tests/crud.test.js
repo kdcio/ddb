@@ -33,7 +33,7 @@ describe('Model', () => {
     expect(obj.db).toBe(DDB.db);
 
     expect(obj.req).toBe(data.req);
-    expect(obj.notReq).toBe('');
+    expect(obj.notReq).toBeNull();
     expect(obj).toHaveProperty('address');
     expect(obj.address.address1).toBe('');
     expect(obj.address.address2).toBe('');

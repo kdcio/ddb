@@ -27,7 +27,7 @@ const assignValues = (fields, input) => {
 
     // no default defined
     if (field.default === undefined) {
-      output[key] = '';
+      output[key] = null;
       return;
     }
 
