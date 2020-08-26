@@ -12,7 +12,7 @@ describe('DDB helpers', () => {
   });
 
   it('should create table', async () => {
-    const { createTable } = DDB.helpers;
+    const { createTable } = DDB.helpers.db;
     expect.assertions(0);
     try {
       await createTable(schema);
@@ -23,7 +23,7 @@ describe('DDB helpers', () => {
   });
 
   it('should clear by GSI', async () => {
-    const { clearByGSI } = DDB.helpers;
+    const { clearByGSI } = DDB.helpers.db;
     const key = {
       pk: 'PK',
       sk: 'SK',
@@ -64,7 +64,7 @@ describe('DDB helpers', () => {
   });
 
   it('should clear by Scan', async () => {
-    const { clearByScan } = DDB.helpers;
+    const { clearByScan } = DDB.helpers.db;
     const key = { pk: 'PK_SCAN', sk: 'SK_SCAN' };
     const params = { Item: key };
 
@@ -87,7 +87,7 @@ describe('DDB helpers', () => {
   });
 
   it('should delete table', async () => {
-    const { deleteTable } = DDB.helpers;
+    const { deleteTable } = DDB.helpers.db;
     expect.assertions(0);
     try {
       await deleteTable();
