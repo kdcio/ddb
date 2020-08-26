@@ -1,7 +1,9 @@
+import assignValues from '../../assignValues';
 import assignKeyValues from '../../assignKeyValues';
 
 const list = async function list({ data = {} } = {}) {
-  const { pk2 } = assignKeyValues(this.schema.sKey, data);
+  const _data = assignValues(this.schema.fields, data, { throwMissing: false });
+  const { pk2 } = assignKeyValues(this.schema.sKey, _data);
   const params = {
     KeyConditionExpression: '#pk = :pk',
     ExpressionAttributeValues: {
