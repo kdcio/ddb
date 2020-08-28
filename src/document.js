@@ -19,4 +19,8 @@ Document.prototype.sKey = function sKey() {
   return assignKeyValues(this._schema.sKey, this._data);
 };
 
+Document.prototype.isDirty = function isDirty(f) {
+  return this._dirtyFields.indexOf(f) >= 0;
+};
+
 export default Document;

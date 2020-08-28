@@ -4,7 +4,7 @@ const ISO_FORMAT = /\d{4}-[01]\d-[0-3]\dT[0-2]\d:[0-5]\d:[0-5]\d\.\d+([+-][0-2]\
 
 describe.only('Model', () => {
   test('should build simple model', async () => {
-    expect.assertions(27);
+    expect.assertions(29);
     const now = () => new Date().toISOString();
     const fields = {
       req: { required: true },
@@ -42,6 +42,7 @@ describe.only('Model', () => {
     obj.notReq = 'world';
     expect(obj.notReq).toBe('world');
     expect(obj.dirtyFields).toContain('notReq');
+    expect(obj.isDirty('notReq')).toBe(true);
 
     await obj.create();
     expect(obj.dirtyFields).toHaveLength(0);
@@ -67,8 +68,13 @@ describe.only('Model', () => {
     expect(obj.createdAt).toMatch(ISO_FORMAT);
 
     // update data
+    /**
+     * TODO: Below code does not work on dirty fields
+     * obj.address.address1 = 'Netherlands';
+     */
     obj.address = { address1: 'Netherlands' };
     expect(obj.dirtyFields).toContain('address');
+    expect(obj.isDirty('address')).toBe(true);
     await obj.save();
     expect(obj.dirtyFields).toHaveLength(0);
 
