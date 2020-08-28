@@ -2,7 +2,7 @@ import DDB from '../src';
 
 const ISO_FORMAT = /\d{4}-[01]\d-[0-3]\dT[0-2]\d:[0-5]\d:[0-5]\d\.\d+([+-][0-2]\d:[0-5]\d|Z)/;
 
-describe.only('Model', () => {
+describe('Model', () => {
   test('should build simple model', async () => {
     expect.assertions(31);
     const now = () => new Date().toISOString();
