@@ -31,7 +31,7 @@ describe('Update', () => {
     });
     await dog.create();
 
-    expect.assertions(13);
+    expect.assertions(22);
     try {
       await dog.update();
     } catch (error) {
@@ -44,6 +44,12 @@ describe('Update', () => {
       expect(error.message).toBe('fields is not an array');
     }
 
+    try {
+      await dog.update(['hello']);
+    } catch (error) {
+      expect(error).toBeUndefined();
+    }
+
     const params = { Key: { pk: 'Retriever#1', sk: 'DOG#Retriever' } };
     let obj = await DDB.db('get', params);
     expect(obj.Item).toBeDefined();
@@ -52,13 +58,16 @@ describe('Update', () => {
 
     dog.owner = 'me';
     dog.birthDate = 'yesterday';
+    expect(dog.dirtyFields).toHaveLength(2);
     await dog.update(['owner', 'color']);
+    expect(dog.dirtyFields).toHaveLength(1);
     obj = await DDB.db('get', params);
     expect(obj.Item.owner).toBe('me');
     // Still undefined because it was included in update fields
     expect(obj.Item.birthDate).toBeUndefined();
 
     await dog.update(['owner', 'birthDate']);
+    expect(dog.dirtyFields).toHaveLength(0);
     obj = await DDB.db('get', params);
     expect(obj.Item.owner).toBe('me');
     expect(obj.Item.birthDate).toBe('yesterday');
@@ -75,5 +84,24 @@ describe('Update', () => {
     obj = await DDB.db('get', params);
     expect(obj.Item.address.address1).toBe('home');
     expect(obj.Item.address.address2).toBeUndefined();
+
+    dog.color = '';
+    dog.birthDate = '';
+    await dog.update(['color', 'birthDate']);
+    obj = await DDB.db('get', params);
+    expect(obj.Item.color).toBeUndefined();
+    expect(obj.Item.birthDate).toBeUndefined();
+
+    await dog.update(['color', 'birthDate']);
+    obj = await DDB.db('get', params);
+    expect(obj.Item.color).toBeUndefined();
+    expect(obj.Item.birthDate).toBeUndefined();
+
+    dog.color = 'white';
+    dog.birthDate = 'now';
+    await dog.update(['color', 'birthDate']);
+    obj = await DDB.db('get', params);
+    expect(obj.Item.color).toBe('white');
+    expect(obj.Item.birthDate).toBe('now');
   });
 });
