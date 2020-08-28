@@ -31,7 +31,7 @@ describe('Update', () => {
     });
     await dog.create();
 
-    expect.assertions(11);
+    expect.assertions(13);
     try {
       await dog.update();
     } catch (error) {
@@ -69,5 +69,11 @@ describe('Update', () => {
     obj = await DDB.db('get', params);
     expect(obj.Item.owner).toBeUndefined();
     expect(obj.Item.birthDate).toBe('today');
+
+    dog.address = { address1: 'home' };
+    await dog.update(['address']);
+    obj = await DDB.db('get', params);
+    expect(obj.Item.address.address1).toBe('home');
+    expect(obj.Item.address.address2).toBeUndefined();
   });
 });
