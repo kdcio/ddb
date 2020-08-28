@@ -1,3 +1,7 @@
+import Debug from 'debug';
+
+const debug = Debug('ddb:update');
+
 // Fields is array of props that need updating
 // Only fields that are dirty will be updated
 // If field has truthy value, it will be set
@@ -44,6 +48,7 @@ const update = async function update(fields) {
     ExpressionAttributeValues,
   };
 
+  debug(params);
   await this.db('update', params);
 };
 
