@@ -2,7 +2,7 @@ import db from './db';
 import Schema from './schema';
 import Document from './document';
 import dbOps from './helpers/db';
-import accessors from './helpers/accessors';
+import assignProperties from './helpers/assignProperties';
 import assignValues from './helpers/assignValues';
 import applyStatics from './helpers/applyStatics';
 import applyMethods from './helpers/applyMethods';
@@ -23,7 +23,16 @@ Model.compile = (name, schema) => {
     this._data = assignValues(schema.fields, doc);
 
     // Create getters and setters
-    accessors(this, schema.fields);
+    assignProperties(this, schema.fields);
+
+    // Fields that changed after instantiation
+    // Will if document is created or saved
+    this._dirtyFields = [];
+    Object.defineProperty(this, 'dirtyFields', {
+      get: function get() {
+        return this._dirtyFields;
+      },
+    });
   };
 
   model.modelName = name;

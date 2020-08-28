@@ -2,9 +2,9 @@ import DDB from '../src';
 
 const ISO_FORMAT = /\d{4}-[01]\d-[0-3]\dT[0-2]\d:[0-5]\d:[0-5]\d\.\d+([+-][0-2]\d:[0-5]\d|Z)/;
 
-describe('Model', () => {
+describe.only('Model', () => {
   test('should build simple model', async () => {
-    expect.assertions(23);
+    expect.assertions(27);
     const now = () => new Date().toISOString();
     const fields = {
       req: { required: true },
@@ -41,8 +41,10 @@ describe('Model', () => {
 
     obj.notReq = 'world';
     expect(obj.notReq).toBe('world');
+    expect(obj.dirtyFields).toContain('notReq');
 
-    await obj.save();
+    await obj.create();
+    expect(obj.dirtyFields).toHaveLength(0);
 
     try {
       await obj.create();
@@ -65,8 +67,11 @@ describe('Model', () => {
     expect(obj.createdAt).toMatch(ISO_FORMAT);
 
     // update data
-    obj.address.address1 = 'Netherlands';
+    obj.address = { address1: 'Netherlands' };
+    expect(obj.dirtyFields).toContain('address');
     await obj.save();
+    expect(obj.dirtyFields).toHaveLength(0);
+
     obj = await Obj.get({
       req: obj.req,
       createdAt: obj.createdAt,

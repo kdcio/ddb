@@ -1,4 +1,4 @@
-const accessors = (model, fields) => {
+const assignProperties = (model, fields) => {
   const keys = Object.keys(fields);
   keys.forEach((key) => {
     const field = fields[key];
@@ -12,6 +12,7 @@ const accessors = (model, fields) => {
         } else {
           this._data[key] = value;
         }
+        this._dirtyFields.push(key);
       },
     });
   });
@@ -19,4 +20,4 @@ const accessors = (model, fields) => {
   return model;
 };
 
-export default accessors;
+export default assignProperties;

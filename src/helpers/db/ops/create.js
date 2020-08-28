@@ -5,6 +5,7 @@ const create = async function create() {
   };
   try {
     await this.db('put', params);
+    this._dirtyFields = [];
   } catch (error) {
     if (error.message === 'The conditional request failed')
       throw new Error('Duplicate key');
