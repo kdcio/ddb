@@ -4,7 +4,7 @@ const ISO_FORMAT = /\d{4}-[01]\d-[0-3]\dT[0-2]\d:[0-5]\d:[0-5]\d\.\d+([+-][0-2]\
 
 describe.only('Model', () => {
   test('should build simple model', async () => {
-    expect.assertions(29);
+    expect.assertions(31);
     const now = () => new Date().toISOString();
     const fields = {
       req: { required: true },
@@ -90,12 +90,27 @@ describe.only('Model', () => {
     expect(obj.address.address2).toBe('');
 
     // delete
-    await obj.delete();
-    obj = await Obj.get({
+    const props = {
       req: obj.req,
       createdAt: obj.createdAt,
       notReq: obj.notReq,
-    });
-    expect(obj).toBeNull();
+    };
+    await obj.delete();
+
+    // verify if data is deleted in db
+    const delObj = await Obj.get(props);
+    expect(delObj).toBeNull();
+
+    // verify if deleted object cannot be used
+    try {
+      obj.req = 'hello';
+    } catch (error) {
+      expect(error).toBeTruthy();
+    }
+    try {
+      await obj.save();
+    } catch (error) {
+      expect(error).toBeTruthy();
+    }
   });
 });
