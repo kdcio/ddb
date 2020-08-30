@@ -12,6 +12,6 @@ const cleanEmpty = (obj) =>
       }
       return [k, v];
     })
-    .reduce((a, [k, v]) => (v == null ? a : ((a[k] = v), a)), {});
+    .reduce((a, [k, v]) => (!v ? a : ((a[k] = v), a)), {});
 
 export default cleanEmpty;
