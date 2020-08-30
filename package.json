@@ -1,6 +1,6 @@
 {
   "name": "@kdcsoftware/ddb",
-  "version": "0.8.3",
+  "version": "0.8.4",
   "description": "Lightweight DynamoDB ODM",
   "main": "dist/ddb.js",
   "scripts": {
