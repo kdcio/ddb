@@ -4,7 +4,7 @@ const ISO_FORMAT = /\d{4}-[01]\d-[0-3]\dT[0-2]\d:[0-5]\d:[0-5]\d\.\d+([+-][0-2]\
 
 describe('Model', () => {
   test('should build simple model', async () => {
-    expect.assertions(31);
+    expect.assertions(34);
     const now = () => new Date().toISOString();
     const fields = {
       req: { required: true },
@@ -17,6 +17,7 @@ describe('Model', () => {
           address2: { required: false, default: '' },
         },
       },
+      food: { required: false, default: [] },
       createdAt: { required: false, default: now },
     };
     const pKey = {
@@ -30,6 +31,7 @@ describe('Model', () => {
 
     const data = { req: 'hello' };
     let obj = new Obj(data);
+    expect(obj.food).toEqual([]);
     expect(obj.db).toBe(DDB.db);
 
     expect(obj.req).toBe(data.req);
@@ -65,6 +67,7 @@ describe('Model', () => {
     expect(obj).toHaveProperty('address');
     expect(obj.address.address1).toBe('');
     expect(obj.address.address2).toBe('');
+    expect(obj.food).toEqual([]);
     expect(obj.createdAt).toMatch(ISO_FORMAT);
 
     // update data
@@ -73,6 +76,8 @@ describe('Model', () => {
      * obj.address.address1 = 'Netherlands';
      */
     obj.address = { address1: 'Netherlands' };
+    obj.food.push('pork');
+    obj.food.push('chicken');
     expect(obj.dirtyFields).toContain('address');
     expect(obj.isDirty('address')).toBe(true);
     await obj.save();
@@ -88,6 +93,7 @@ describe('Model', () => {
     expect(obj).toHaveProperty('address');
     expect(obj.address.address1).toBe('Netherlands');
     expect(obj.address.address2).toBe('');
+    expect(obj.food).toHaveLength(2);
 
     // delete
     const props = {

@@ -36,7 +36,6 @@ describe('Model', () => {
     expect(o).toEqual({
       req: 'hello',
       presentAddress: { address1: '123' },
-      permanentAddress: {},
     });
   });
 
@@ -71,9 +70,7 @@ describe('Model', () => {
     const doc = { req: 'hello' };
     const obj = new Obj(doc);
     const j = obj.toJSON();
-    expect(j).toBe(
-      '{"req":"hello","presentAddress":{"address1":"123"},"permanentAddress":{}}'
-    );
+    expect(j).toBe('{"req":"hello","presentAddress":{"address1":"123"}}');
   });
 
   test('should get primary & secondary keys', async () => {
