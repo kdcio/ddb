@@ -1,4 +1,9 @@
+import Debug from 'debug';
+
+const debug = Debug('ddb:assign:vals');
+
 const assignValues = (fields, input, { throwMissing = true } = {}) => {
+  debug(fields, input, throwMissing);
   const output = {};
   const keys = Object.keys(fields);
   keys.forEach((key) => {

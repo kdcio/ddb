@@ -1,4 +1,9 @@
+import Debug from 'debug';
+
+const debug = Debug('ddb:assign:props');
+
 const assignProperties = (model, fields) => {
+  debug(model, fields);
   const keys = Object.keys(fields);
   keys.forEach((key) => {
     const field = fields[key];

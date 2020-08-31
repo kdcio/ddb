@@ -1,4 +1,10 @@
+import Debug from 'debug';
+
+const debug = Debug('ddb:assign:key');
+
 const assignKeyValues = function assignKeyValues(keyDefs, data) {
+  debug(keyDefs, data);
+
   const tokenMatcher = /({([a-zA-Z0-9]+)})/g;
   const parsedKeys = {};
 
