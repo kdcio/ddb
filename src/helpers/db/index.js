@@ -3,7 +3,7 @@ import list from './ops/list';
 import create from './ops/create';
 import save from './ops/save';
 import update from './ops/update';
-import del from './ops/delete';
+import del from './ops/del';
 
 const db = {
   statics: { get, list },
