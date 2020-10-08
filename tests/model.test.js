@@ -15,6 +15,9 @@ const createAnimals = async (Animal) => {
   await turtle.save();
 };
 
+const pKey = { pk: '{type}#{id}', sk: 'ANIMAL#{type}' };
+const sKey = { pk2: 'ANIMAL', sk2: '{type}#{id}' };
+
 describe('Model', () => {
   test('should list items', async () => {
     const fields = {
@@ -22,8 +25,7 @@ describe('Model', () => {
       name: { required: false },
       type: { required: false },
     };
-    const pKey = { pk: '{type}#{id}', sk: 'ANIMAL#{type}' };
-    const sKey = { pk2: 'ANIMAL', sk2: '{type}#{id}' };
+
     const schema = new DDB.Schema(fields, pKey, sKey);
     const Animal = DDB.model('Animal', schema);
     await createAnimals(Animal);
@@ -37,10 +39,9 @@ describe('Model', () => {
       name: { required: false },
       type: { required: false },
     };
-    const pKey = { pk: '{type}#{id}', sk: 'ANIMAL#{type}' };
-    const sKey = { pk2: 'ANIMAL', sk2: '{type}#{id}' };
+
     const schema = new DDB.Schema(fields, pKey, sKey);
-    schema.statics.list = async function list(type) {
+    schema.statics.list = async function ls(type) {
       const params = {
         KeyConditionExpression: '#pk = :pk and begins_with(#sk, :sk)',
         ExpressionAttributeValues: {
@@ -69,8 +70,7 @@ describe('Model', () => {
       name: { required: false },
       type: { required: false },
     };
-    const pKey = { pk: '{type}#{id}', sk: 'ANIMAL#{type}' };
-    const sKey = { pk2: 'ANIMAL', sk2: '{type}#{id}' };
+
     const schema = new DDB.Schema(fields, pKey, sKey);
     schema.methods.rename = async function rename(name) {
       this.name = name;

@@ -16,8 +16,8 @@ describe('Error', () => {
 
     expect.assertions(1);
     try {
-      // eslint-disable-next-line no-unused-vars
       const obj = new Obj(data);
+      obj.toObject();
     } catch (err) {
       expect(err.message).toEqual('Missing req');
     }
@@ -26,8 +26,8 @@ describe('Error', () => {
   test('should fail due to wrong schema', () => {
     expect.assertions(1);
     try {
-      // eslint-disable-next-line no-unused-vars
-      const Obj = DDB.model('Obj', {});
+      const obj = DDB.model('Obj', {});
+      obj.toObject();
     } catch (err) {
       expect(err.message).toEqual(
         'Make sure 2nd argument is a new instance of DDB.Schema().'

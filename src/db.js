@@ -20,10 +20,9 @@ const DB = (action, params) => {
     actualParams = { TransactItems: [] };
     params.TransactItems.forEach((p) => {
       Object.keys(p).forEach((act) => {
-        const req = {
+        actualParams.TransactItems.push({
           [act]: { TableName, ...p[act] },
-        };
-        actualParams.TransactItems.push(req);
+        });
       });
     });
 

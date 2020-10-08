@@ -35,7 +35,7 @@ describe('Update', () => {
     try {
       await dog.update();
     } catch (error) {
-      expect(error.message).toBe('Missing fields to update');
+      expect(error.message).toBe('fields is not an array');
     }
 
     try {

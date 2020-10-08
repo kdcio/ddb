@@ -21,7 +21,6 @@ describe('Validation', () => {
 
     expect.assertions(2);
     try {
-      // eslint-disable-next-line no-unused-vars
       const dog = new Animal({ id: 1, name: 'sparkle', type: 'dog' });
       expect(dog.type).toBe('dog');
     } catch (error) {
@@ -29,8 +28,8 @@ describe('Validation', () => {
     }
 
     try {
-      // eslint-disable-next-line no-unused-vars
       const mouse = new Animal({ id: 1, name: 'gonzales', type: 'mouse' });
+      mouse.toObject();
     } catch (error) {
       expect(error.message).toBe('Invalid type');
     }

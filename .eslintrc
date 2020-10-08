@@ -1,7 +1,7 @@
 {
   "parser": "babel-eslint",
-  "extends": ["airbnb-base", "prettier"],
-  "plugins": ["prettier"],
+  "extends": ["airbnb-base", "prettier", "plugin:sonarjs/recommended"],
+  "plugins": ["prettier", "sonarjs"],
   "rules": {
     "prettier/prettier": ["error"],
     "no-underscore-dangle": "off"

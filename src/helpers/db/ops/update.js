@@ -7,7 +7,6 @@ const debug = Debug('ddb:update');
 // If field has truthy value, it will be set
 // otherwise it will be removed
 const update = async function update(fields) {
-  if (!fields) throw new Error('Missing fields to update');
   if (!Array.isArray(fields)) throw new Error('fields is not an array');
 
   const fieldsUpdated = [];
@@ -19,8 +18,7 @@ const update = async function update(fields) {
 
   // Fields that need to be set
   fields.forEach((f) => {
-    if (!this.isDirty(f)) return;
-    if (!data[f]) return;
+    if (!this.isDirty(f) || !data[f]) return;
     if (SET !== '') SET += `, #${f} = :${f}`;
     else SET = `SET #${f} = :${f}`;
     ExpressionAttributeNames[`#${f}`] = f;
@@ -30,8 +28,7 @@ const update = async function update(fields) {
 
   // Fields that need to be removed
   fields.forEach((f) => {
-    if (!this.isDirty(f)) return;
-    if (data[f]) return;
+    if (!this.isDirty(f) || data[f]) return;
     if (REMOVE === '') REMOVE += ` REMOVE #${f}`;
     else REMOVE += `, #${f}`;
     ExpressionAttributeNames[`#${f}`] = f;
