@@ -4,3 +4,4 @@ lib/
 dist/
 .serverless
 .parcel-cache
+test-report.xml
