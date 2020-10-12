@@ -4,11 +4,11 @@ A lightweight object modeling for [DynamoDB](https://aws.amazon.com/dynamodb/) i
 
 The default database operations of this package assumes [single table design](https://www.alexdebrie.com/posts/dynamodb-single-table/) but all can be overridden by writing your own.
 
-[![ver](https://img.shields.io/npm/v/@kdcsoftware/ddb?style=for-the-badge)](https://www.npmjs.com/package/@kdcsoftware/ddb)
-[![build](https://img.shields.io/github/workflow/status/kdcsoftware/ddb/build?style=for-the-badge)](https://github.com/kdcsoftware/ddb/actions?query=workflow%3Abuild)
-[![codecov](https://img.shields.io/codecov/c/github/kdcsoftware/ddb?style=for-the-badge)](https://codecov.io/gh/kdcsoftware/ddb)
-[![size](https://img.shields.io/bundlephobia/min/@kdcsoftware/ddb?style=for-the-badge)](https://bundlephobia.com/result?p=@kdcsoftware/ddb)
-[![license](https://img.shields.io/github/license/kdcsoftware/ddb?style=for-the-badge)](https://github.com/kdcsoftware/ddb/blob/master/LICENSE)
+[![ver](https://img.shields.io/npm/v/@kdcsoftware/ddb?style=flat-square)](https://www.npmjs.com/package/@kdcsoftware/ddb)
+[![build](https://img.shields.io/github/workflow/status/kdcsoftware/ddb/build?style=flat-square)](https://github.com/kdcsoftware/ddb/actions?query=workflow%3Abuild)
+[![codecov](https://img.shields.io/codecov/c/github/kdcsoftware/ddb?style=flat-square)](https://codecov.io/gh/kdcsoftware/ddb) [![Sonar Quality Gate](https://img.shields.io/sonar/alert_status/kdcsoftware_ddb?server=https%3A%2F%2Fsonarcloud.io&sonarVersion=6&style=flat-square)](https://sonarcloud.io/dashboard?id=kdcsoftware_ddb) [![Sonar Tech Debt](https://img.shields.io/sonar/tech_debt/kdcsoftware_ddb?server=https%3A%2F%2Fsonarcloud.io&sonarVersion=6&style=flat-square)](https://sonarcloud.io/dashboard?id=kdcsoftware_ddb)
+[![size](https://img.shields.io/bundlephobia/min/@kdcsoftware/ddb?style=flat-square)](https://bundlephobia.com/result?p=@kdcsoftware/ddb)
+[![license](https://img.shields.io/github/license/kdcsoftware/ddb?style=flat-square)](https://github.com/kdcsoftware/ddb/blob/master/LICENSE)
 
 ## Installation
 
@@ -91,3 +91,8 @@ To enable:
 ```bash
 DEBUG=ddb:* node app.js
 ```
+
+
+## Sonar Cloud Badges
+
+[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=kdcsoftware_ddb&metric=alert_status)](https://sonarcloud.io/dashboard?id=kdcsoftware_ddb) [![Coverage](https://sonarcloud.io/api/project_badges/measure?project=kdcsoftware_ddb&metric=coverage)](https://sonarcloud.io/dashboard?id=kdcsoftware_ddb) [![Code Smells](https://sonarcloud.io/api/project_badges/measure?project=kdcsoftware_ddb&metric=code_smells)](https://sonarcloud.io/dashboard?id=kdcsoftware_ddb) [![Bugs](https://sonarcloud.io/api/project_badges/measure?project=kdcsoftware_ddb&metric=bugs)](https://sonarcloud.io/dashboard?id=kdcsoftware_ddb) [![Lines of Code](https://sonarcloud.io/api/project_badges/measure?project=kdcsoftware_ddb&metric=ncloc)](https://sonarcloud.io/dashboard?id=kdcsoftware_ddb) [![Duplicated Lines (%)](https://sonarcloud.io/api/project_badges/measure?project=kdcsoftware_ddb&metric=duplicated_lines_density)](https://sonarcloud.io/dashboard?id=kdcsoftware_ddb) [![Maintainability Rating](https://sonarcloud.io/api/project_badges/measure?project=kdcsoftware_ddb&metric=sqale_rating)](https://sonarcloud.io/dashboard?id=kdcsoftware_ddb) [![Reliability Rating](https://sonarcloud.io/api/project_badges/measure?project=kdcsoftware_ddb&metric=reliability_rating)](https://sonarcloud.io/dashboard?id=kdcsoftware_ddb) [![Security Rating](https://sonarcloud.io/api/project_badges/measure?project=kdcsoftware_ddb&metric=security_rating)](https://sonarcloud.io/dashboard?id=kdcsoftware_ddb) [![Technical Debt](https://sonarcloud.io/api/project_badges/measure?project=kdcsoftware_ddb&metric=sqale_index)](https://sonarcloud.io/dashboard?id=kdcsoftware_ddb) [![Vulnerabilities](https://sonarcloud.io/api/project_badges/measure?project=kdcsoftware_ddb&metric=vulnerabilities)](https://sonarcloud.io/dashboard?id=kdcsoftware_ddb)
