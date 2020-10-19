@@ -56,7 +56,7 @@
   },
   "dependencies": {
     "@babel/runtime": "^7.11.2",
-    "aws-sdk": "^2.759.0",
+    "aws-sdk": "^2.762.0",
     "debug": "^4.3.0"
   },
   "husky": {
