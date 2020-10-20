@@ -1,5 +1,5 @@
 {
-  "name": "@kdcsoftware/ddb",
+  "name": "@kdcio/ddb",
   "version": "0.8.7",
   "description": "Lightweight DynamoDB ODM",
   "main": "dist/ddb.js",
@@ -23,11 +23,12 @@
   ],
   "author": {
     "name": "Ian Dela Cruz",
-    "email": "iandc76@gmail.com"
+    "email": "ian@kdcsoftware.com",
+    "url": "https://www.kdcsoftware.com"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/kdcsoftware/ddb"
+    "url": "https://github.com/kdcio/ddb"
   },
   "license": "MIT",
   "devDependencies": {
@@ -67,8 +68,7 @@
   "lint-staged": {
     "*.js": [
       "eslint src --ext .js --fix",
-      "pretty-quick --staged",
-      "git add"
+      "pretty-quick --staged"
     ]
   }
 }
