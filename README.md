@@ -4,11 +4,7 @@ A lightweight object modeling for [DynamoDB](https://aws.amazon.com/dynamodb/) i
 
 The default database operations of this package assumes [single table design](https://www.alexdebrie.com/posts/dynamodb-single-table/) but all can be overridden by writing your own.
 
-[![ver](https://img.shields.io/npm/v/@kdcio/ddb)](https://www.npmjs.com/package/@kdcio/ddb)
-[![build](https://img.shields.io/github/workflow/status/kdcio/ddb/build)](https://github.com/kdcio/ddb/actions?query=workflow%3Abuild)
-[![codecov](https://img.shields.io/codecov/c/github/kdcio/ddb)](https://codecov.io/gh/kdcio/ddb) [![Sonar Quality Gate](https://img.shields.io/sonar/alert_status/kdcio_ddb?server=https%3A%2F%2Fsonarcloud.io&sonarVersion=6&style=flat-square)](https://sonarcloud.io/dashboard?id=kdcio_ddb) [![Sonar Tech Debt](https://img.shields.io/sonar/tech_debt/kdcio_ddb?server=https%3A%2F%2Fsonarcloud.io&sonarVersion=6&style=flat-square)](https://sonarcloud.io/dashboard?id=kdcio_ddb)
-[![size](https://img.shields.io/bundlephobia/min/@kdcio/ddb)](https://bundlephobia.com/result?p=@kdcio/ddb)
-[![license](https://img.shields.io/github/license/kdcio/ddb)](https://github.com/kdcio/ddb/blob/master/LICENSE)
+[![ver](https://img.shields.io/npm/v/@kdcio/ddb)](https://www.npmjs.com/package/@kdcio/ddb) [![size](https://badgen.net/bundlephobia/minzip/@kdcio/ddb)](https://bundlephobia.com/result?p=@kdcio/ddb) [![build](https://img.shields.io/github/workflow/status/kdcio/ddb/build)](https://github.com/kdcio/ddb/actions?query=workflow%3Abuild) [![Known Vulnerabilities](https://snyk.io/test/github/kdcio/ddb/badge.svg?targetFile=package.json)](https://snyk.io/test/github/kdcio/ddb?targetFile=package.json) [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=kdcio_ddb&metric=alert_status)](https://sonarcloud.io/dashboard?id=kdcio_ddb) [![Code Smells](https://sonarcloud.io/api/project_badges/measure?project=kdcio_ddb&metric=code_smells)](https://sonarcloud.io/dashboard?id=kdcio_ddb) [![Coverage](https://sonarcloud.io/api/project_badges/measure?project=kdcio_ddb&metric=coverage)](https://sonarcloud.io/dashboard?id=kdcio_ddb) [![license](https://img.shields.io/github/license/kdcio/ddb)](https://github.com/kdcio/ddb/blob/master/LICENSE)
 
 ## Installation
 
