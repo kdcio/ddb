@@ -56,7 +56,7 @@
     "webpack-cli": "^3.3.12"
   },
   "dependencies": {
-    "@babel/runtime": "^7.12.1",
+    "@babel/runtime": "^7.12.5",
     "aws-sdk": "^2.774.0",
     "debug": "^4.3.0"
   },
